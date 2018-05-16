@@ -1,9 +1,10 @@
 package main
 
-import ("fmt"
-"net/http"
-"io/ioutil"
-"encoding/xml")
+import (
+	"fmt"
+	"io/ioutil"
+	"net/http"
+)
 
 func main() {
 	resp, _ := http.Get("http://feeds.bbci.co.uk/news/technology/rss.xml?edition=uk")

@@ -1,10 +1,11 @@
 package main
 
-import ("fmt"
-"net/http"
-"io/ioutil"
-"os"
-//"encoding/xml"
+import (
+	"fmt"
+	"io/ioutil"
+	"net/http"
+	"os"
+	"encoding/json"
 )
 
 const DarkSkyUri = "https://api.darksky.net/forecast/%s/50.7184,-3.5339?exclude=currently,minutely,daily,alerts,flags"
@@ -13,8 +14,10 @@ func main() {
 	completedUri := makeUri()
 	resp, _ := http.Get(completedUri)
 	bytes, _ := ioutil.ReadAll(resp.Body)
-	stringBody := string(bytes)
-	fmt.Println(stringBody)
+	var wd Weather
+	err := json.Unmarshal(bytes, &wd)
+	fmt.Println(err)
+	fmt.Println(wd.Latitude)
 	resp.Body.Close()
 }
 
